@@ -7,7 +7,7 @@ const path = require("path")
 
 const termHandler = require("./scripts/terminal-handeler")
 
-var term
+var term = {}
 
 var mainWindow
 var autoLaunch
@@ -78,14 +78,18 @@ function createTray() {
 
 app.whenReady().then(() => {
   mainWindow = createWindow()
-  term = new termHandler.newTerm(function(data) {send(data)})
+})
+ipcMain.on('newTerm', (eve, arg) => {
+  term[arg.name]= new termHandler.newTerm(function(data) {var nm = arg.name;send(data, nm)}, arg.shell || undefined)
 })
 ipcMain.on('run', (event, arg) => {
-  console.log(arg)
-  term.write(`${arg}\r`)
+  term[arg.name].write(`${arg.data}`)
 })
-function send(data) {
-  mainWindow.webContents.send('printTerm', data);
+ipcMain.on('resize', (event, arg) => {
+  term[arg.name].resize(arg.cols, arg.rows)
+})
+function send(data, nm) {
+  mainWindow.webContents.send('printTerm', {data: data, name: nm});
 }
 /*
 app.on('activate', () => {

@@ -20,10 +20,10 @@ class newTerm {
         this.pty = ptyProcess
     }
     write(txt) {
-        this.pty.write(`${txt}\r`)
+        this.pty.write(`${txt}`)
     }
     resize(col, row) {
-        this.pty.resize(col, row)
+        this.pty.resize(row, col)
     }
 }
 module.exports.newTerm = newTerm

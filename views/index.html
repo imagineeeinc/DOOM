@@ -9,19 +9,51 @@
     <link rel="stylesheet" href="../styles/style.css">
     <link rel="stylesheet" href="../node_modules/xterm/css/xterm.css" />
 
+    <style id="scroll"></style>
+
     <script src="../node_modules/xterm/lib/xterm.js"></script>
 </head>
-<body>
+<body onscroll="disableScrolling()" onmousewheel="enableScrolling()" onclick="enableScrolling()" onmousemove="enableScrolling()">
     <div id="titlebar">
-        <div id="drag">DOOM</div>
+        <button id="menu" title="menu"><img src="../file/icons/menu.svg"></button>
+        <div id="drag" title="DOOM Terminal">DOOM</div>
         <div id="traffic">
-            <button id="minimize"><img src="../file/icons/minimize.svg"></button>
-            <button id="maximize"><img src="../file/icons/maximize.svg"></button>
-            <button id="close"><img src="../file/icons/close.svg"></button>
+            <button id="minimize" title="minimize"><img src="../file/icons/minimize.svg"></button>
+            <button id="maximize" title="maximize"><img src="../file/icons/maximize.svg"></button>
+            <button id="close" title="close"><img src="../file/icons/close.svg"></button>
         </div>
     </div>
-    <div id="terminal"></div>
+    <div id="terminal-holder">
+        <div id="terminal"></div>
+    </div>
+    <script>
+        var move = false
+        var timeout
+        function disableScrolling() {
+            setTimeout(function() {
+                document.getElementById("scroll").innerHTML = "::-webkit-scrollbar {display: none}"
+                move = false
+            }, 500);
+        }
+        function enableScrolling() {
+            document.getElementById("scroll").innerHTML = "::-webkit-scrollbar {}"
+            move = true
+            clearTimeout(timeout)
+            timeout = setTimeout(function(){move = false}, 2000)
+        }
+        disableScrolling()
+        document.onkeyup = disableScrolling
+        document.onmouseup = enableScrolling
+        document.onscroll = disableScrolling
+        document.onmousewheel = enableScrolling
+        setInterval(function() {
+            if(move === false) {
+                disableScrolling()
+            }
+        }, 1000)
+    </script>
     <script src="../scripts/require.js"></script>
+    <script src="../scripts/terminal-client.js"></script>
     <script src="../scripts/app.js"></script>
 </body>
 </html>
