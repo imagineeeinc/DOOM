@@ -3,13 +3,13 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 document.body.onkeydown = function(event) {
-    if (process.env.DEV == "true") {
+    if (process.env.DEV != "true") {
         if (event.keyCode === 73 && event.shiftKey === true && event.ctrlKey === true) {
             event.preventDefault()
         }
     }
     if (event.keyCode === 67 && event.shiftKey === true && event.ctrlKey === true) {
-        
+
     }
 }
 
