@@ -18,8 +18,8 @@ function createWindow () {
     frame: false,
     fullscreenable: true,
     hasShadow: true,
-    width: 900,
-    height: 700,
+    width: 1100,
+    height: 900,
     minimizable: true,
     minWidth: 670,
     minHeight: 460,
@@ -78,9 +78,13 @@ function createTray() {
 
 app.whenReady().then(() => {
   mainWindow = createWindow()
+  mainWindow.maximize()
+  setTimeout(() => {
+    mainWindow.webContents.send('allowedToBegin', {begin: true})
+  }, 1000)
 })
 ipcMain.on('newTerm', (eve, arg) => {
-  term[arg.name]= new termHandler.newTerm(function(data) {var nm = arg.name;send(data, nm)}, arg.shell || undefined)
+  term[arg.name]= new termHandler.newTerm(function(data) {var nm = arg.name;send(data, nm)}, arg.name, {col: arg.cols, row: arg.rows}, arg.shell || undefined)
 })
 ipcMain.on('run', (event, arg) => {
   term[arg.name].write(`${arg.data}`)
@@ -88,8 +92,14 @@ ipcMain.on('run', (event, arg) => {
 ipcMain.on('resize', (event, arg) => {
   term[arg.name].resize(arg.cols, arg.rows)
 })
+ipcMain.on('reload', (event, arg) => {
+  mainWindow.reload()
+  setTimeout(() => {
+    mainWindow.webContents.send('allowedToBegin', {begin: true})
+  }, 1000)
+})
 function send(data, nm) {
-  mainWindow.webContents.send('printTerm', {data: data, name: nm});
+  mainWindow.webContents.send('printTerm', {data: data, name: nm})
 }
 /*
 app.on('activate', () => {

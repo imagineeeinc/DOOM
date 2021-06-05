@@ -8,11 +8,11 @@ var shell = os.platform() === 'win32' ? 'cmd.exe' : 'bash';
 //ptyProcess.write('ls\r');
 
 class newTerm {
-    constructor(callback, cShell) {
+    constructor(callback, name, dimen, cShell) {
         var ptyProcess = pty.spawn(cShell || shell, [], {
-            name: 'DOOM Terminal',
-            cols: 80,
-            rows: 30,
+            name: name || 'DOOM Terminal',
+            cols: dimen.col,
+            rows: dimen.row,
             cwd: process.env.HOME,
             env: process.env
         })

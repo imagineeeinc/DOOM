@@ -7,21 +7,25 @@ function newTerm(name, shell) {
         cursorBlink: "bar"
     })
     term[name].name = name
-    ipc.send('newTerm', {name: name})
 
     term[name].open(document.getElementById('terminal'))
     term[name].loadAddon(fitAddon)
     fitAddon.fit()
+
+    ipc.send('newTerm', {name: name, shell: shell, cols: term[name].cols, rows: term[name].rows})
 
     term[name].onData((data, ev) => {
         ipc.send('run', {data: data, name: name})
     })
 }
 
-newTerm("main_shell")
-for(var i=0;i < term.length;i++) {
-    ipc.send('resize', {cols: term[i].cols, rows: term[i].rows, name: term[i].name})
-}
+ipc.on('allowedToBegin', (event, arg) => {
+    console.log("Can Proceed To Begin")
+    newTerm("main_shell")
+    for(var i=0;i < term.length;i++) {
+        ipc.send('resize', {cols: term[i].cols, rows: term[i].rows, name: term[i].name})
+    }
+})
 
 //term.write('Hello from \x1B[1;3;31mDOOM, The Terminal Of DOOM!\x1B[0m')
 

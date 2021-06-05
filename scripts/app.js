@@ -8,8 +8,11 @@ document.body.onkeydown = function(event) {
             event.preventDefault()
         }
     }
-    if (event.keyCode === 67 && event.shiftKey === true && event.ctrlKey === true) {
-
+    if (event.keyCode === 82 && event.ctrlKey === true) {
+        event.preventDefault()
+    }
+    if (event.keyCode === 82 && event.shiftKey === true && event.ctrlKey === true) {
+        ipc.send('reload')
     }
 }
 
