@@ -23,7 +23,10 @@ class newTerm {
         this.pty.write(`${txt}`)
     }
     resize(col, row) {
-        this.pty.resize(row, col)
+        this.pty.resize(col, row)
+    }
+    kill() {
+        this.pty.kill('SIGKILL')
     }
 }
 module.exports.newTerm = newTerm

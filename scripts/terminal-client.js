@@ -1,6 +1,12 @@
 var term = {}
+const os = require('os')
+var defaultShell = os.platform() === 'win32' ? 'cmd.exe' : 'bash';
 const fitAddon = new FitAddon()
 var last_size = {x:0,y:0}
+var curTerm
+
+var closeBtn = document.createElement("button")
+closeBtn.innerHTML = "<img src='../file/icons/close.svg'>"
 
 function newTerm(name, shell) {
     term[name] = new Terminal({
@@ -8,16 +14,34 @@ function newTerm(name, shell) {
     })
     term[name].name = name
 
-    term[name].open(document.getElementById('terminal'))
+    let doc = document.createElement("div")
+    doc.id = name
+    document.getElementById("terminal-holder").append(doc)
+
+    term[name].open(document.getElementById(name))
     term[name].loadAddon(fitAddon)
     fitAddon.fit()
+
+    let tab = document.createElement("span")
+    let clo = closeBtn.cloneNode(true)
+    tab.id = "tab-" + name
+    tab.innerHTML = "<span>" + shell || name + "</span>"
+    tab.append(clo)
+    tab.setAttribute("title", name)
+    tab.setAttribute("onclick", "openTerm('" + name +"')")
+    clo.setAttribute("onclick", "closeTerm('" + name +"')")
+    document.getElementById("tabs").append(tab)
 
     ipc.send('newTerm', {name: name, shell: shell, cols: term[name].cols, rows: term[name].rows})
 
     term[name].onData((data, ev) => {
         ipc.send('run', {data: data, name: name})
     })
+    document.getElementById(name).scrollIntoView()
+    curTerm = name
 }
+
+ipc.send('canIstart')
 
 ipc.on('allowedToBegin', (event, arg) => {
     console.log("Can Proceed To Begin")
@@ -26,22 +50,33 @@ ipc.on('allowedToBegin', (event, arg) => {
         ipc.send('resize', {cols: term[i].cols, rows: term[i].rows, name: term[i].name})
     }
 })
-
-//term.write('Hello from \x1B[1;3;31mDOOM, The Terminal Of DOOM!\x1B[0m')
+function openTerm(name) {
+    try {
+        document.getElementById(name).scrollIntoView()
+        curTerm = name
+    }
+    catch(e) {}
+}
+function closeTerm(name) {
+    ipc.send('kill', {name: name})
+    document.getElementById("tab-" + name).remove()
+    document.getElementById(name).remove()
+    delete term[name]
+}
 
 ipc.on('printTerm', (event, arg) => {
+    document.getElementById("tab-" + arg.name).querySelector("span").innerHTML = arg.file
     term[arg.name].write(arg.data)
 })
+/*TODO: set selected
+setInterval(function() {
+    document.getElementById("tab-" + curTerm).setAttribute("selected", "true")
+}, 50)
+*/
 
 setInterval(function() {
-    let nowSize = {x: win.webContents.getOwnerBrowserWindow().getBounds().width, y: win.webContents.getOwnerBrowserWindow().getBounds().height}
-    if (last_size.x == 0 || last_size.y == 0) {
-        last_size = nowSize
-    } else if (last_size.x != nowSize.x || last_size.y != nowSize.y) {
-        last_size = nowSize
         for(var i=0;i < Object.keys(term).length;i++) {
             fitAddon.fit()
             ipc.send('resize', {cols: term[Object.keys(term)[i]].cols, rows: term[Object.keys(term)[i]].rows, name: Object.keys(term)[i]})
         }
-    }
-}, 1000)
+}, 5000)

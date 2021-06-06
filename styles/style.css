@@ -78,6 +78,7 @@ header {
   display: grid;
   justify-content: center;
   user-select: none;
+  height: 25px;
 }
 #titlebar > #drag {
   -webkit-app-region: drag;
@@ -126,6 +127,80 @@ header {
   background-color: rgb(22, 22, 22);
 }
 
-#terminal-holder, #terminal {
-  height: 98%;
+#terminal-holder{
+  height: 100%;
+}
+#terminal-holder > div {
+  height: 100%;
+  overflow-y: auto;
+}
+#terminal-holder {
+  overflow: hidden;
+}
+
+#tab-holder {
+  height: 30px;
+  width: 100vw;
+  user-select: none;
+  display: grid;
+  grid-template-columns: 1fr 70px;
+  grid-template-rows: 1fr;
+  gap: 0px 0px;
+  grid-template-areas:
+    "tabs more-tabs";
+}
+.tabs { grid-area: tabs; }
+.more-tabs { grid-area: more-tabs; }
+#tabs {
+  height: 30px;
+  display: grid;
+  grid-template-columns: 1fr;
+}
+#tabs > span {
+  border: 0.01px solid grey;
+  text-align: center;
+}
+#tabs > span:hover {
+  background-color: rgb(22, 22, 22);
+}
+#tabs > span:active {
+  background-color: rgb(41, 41, 41);
+}
+#more-tabs {
+  width: 70px;
+  display: inline-block;
+}
+#more-tabs > button {
+  border: none;
+  border-radius: 3px;
+  background-color: rgb(0,0,0);
+  width: 30px;
+  height: 25px;
+  margin: 0 !important;
+  padding: 0;
+}
+#more-tabs > button:hover {
+  background-color: rgb(22, 22, 22);
+}
+#more-tabs > button > img {
+  height: 23px;
+}
+#tabs > span > button {
+  border: none;
+  border-radius: 3px;
+  background-color: rgb(0,0,0);
+  width: 22px;
+  height: 21px;
+  margin: 0;
+  margin-top: 3.5px;
+  padding: 0;
+  float: right;
+}
+#tabs > span > button:hover {
+  background-color: rgb(22, 22, 22);
+}#tabs > span > button:active {
+  background-color: rgb(68, 68, 68);
+}
+#tabs > span > button > img {
+  height: 23px;
 }

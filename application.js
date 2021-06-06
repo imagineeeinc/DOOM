@@ -79,9 +79,11 @@ function createTray() {
 app.whenReady().then(() => {
   mainWindow = createWindow()
   mainWindow.maximize()
+  /*
   setTimeout(() => {
+    console.log("allowed to start")
     mainWindow.webContents.send('allowedToBegin', {begin: true})
-  }, 1000)
+  }, 1000)*/
 })
 ipcMain.on('newTerm', (eve, arg) => {
   term[arg.name]= new termHandler.newTerm(function(data) {var nm = arg.name;send(data, nm)}, arg.name, {col: arg.cols, row: arg.rows}, arg.shell || undefined)
@@ -89,17 +91,25 @@ ipcMain.on('newTerm', (eve, arg) => {
 ipcMain.on('run', (event, arg) => {
   term[arg.name].write(`${arg.data}`)
 })
+ipcMain.on('kill', (event, arg) => {
+  term[arg.name].kill()
+})
 ipcMain.on('resize', (event, arg) => {
   term[arg.name].resize(arg.cols, arg.rows)
 })
+ipcMain.on('canIstart', (eve, arg) => {
+  mainWindow.webContents.send('allowedToBegin', {begin: true})
+})
 ipcMain.on('reload', (event, arg) => {
   mainWindow.reload()
+  /*
   setTimeout(() => {
+    console.log("allowed to start")
     mainWindow.webContents.send('allowedToBegin', {begin: true})
-  }, 1000)
+  }, 1000)*/
 })
 function send(data, nm) {
-  mainWindow.webContents.send('printTerm', {data: data, name: nm})
+  mainWindow.webContents.send('printTerm', {data: data, name: nm, file: term[nm].pty._file})
 }
 /*
 app.on('activate', () => {

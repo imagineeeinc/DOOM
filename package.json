@@ -1,6 +1,6 @@
 {
-  "name": "DOOM",
-  "version": "1.0.0",
+  "name": "doom",
+  "version": "1.0.1",
   "description": "A powerfully small terminal emulator, THE TERMINAL OF DOOM",
   "main": "application.js",
   "scripts": {
