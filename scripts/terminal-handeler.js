@@ -26,7 +26,15 @@ class newTerm {
         this.pty.resize(col, row)
     }
     kill() {
-        this.pty.kill('SIGKILL')
+        if (os.platform() === 'win32') {
+            try {
+                //this.pty.kill()
+            } catch (error) {
+                
+            }
+        } else {
+            this.pty.kill('SIGKILL')
+        }
     }
 }
 module.exports.newTerm = newTerm

@@ -24,6 +24,7 @@ body {
 
 ::-webkit-scrollbar {
   width: 6px;
+  transform: translateX(-100);
 }
 ::-webkit-scrollbar-track {
   background-color: transparent;
@@ -169,6 +170,7 @@ header {
 #more-tabs {
   width: 70px;
   display: inline-block;
+  border-bottom: 2px solid white;
 }
 #more-tabs > button {
   border: none;
@@ -188,19 +190,33 @@ header {
 #tabs > span > button {
   border: none;
   border-radius: 3px;
-  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0);
   width: 22px;
   height: 21px;
   margin: 0;
   margin-top: 3.5px;
   padding: 0;
   float: right;
+  z-index: 5;
 }
 #tabs > span > button:hover {
-  background-color: rgb(22, 22, 22);
+  background-color: rgb(31, 31, 31);
 }#tabs > span > button:active {
   background-color: rgb(68, 68, 68);
 }
 #tabs > span > button > img {
   height: 23px;
+}
+#tabs > span:not(.selected) > button {
+  display: none;
+}
+#tabs > span:not(.selected) {
+  border-bottom: 2px solid white !important;
+}
+.selected {
+  border: 2px solid white !important;
+  border-bottom: 2px solid black !important;
+}
+.selected > button {
+  display: block;
 }

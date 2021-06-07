@@ -16,11 +16,13 @@ function newTerm(name, shell) {
 
     let doc = document.createElement("div")
     doc.id = name
+
     document.getElementById("terminal-holder").append(doc)
 
     term[name].open(document.getElementById(name))
-    term[name].loadAddon(fitAddon)
-    fitAddon.fit()
+    term[name].fitA = new FitAddon()
+    term[name].loadAddon(term[name].fitA)
+    term[name].fitA.fit()
 
     let tab = document.createElement("span")
     let clo = closeBtn.cloneNode(true)
@@ -45,7 +47,7 @@ ipc.send('canIstart')
 
 ipc.on('allowedToBegin', (event, arg) => {
     console.log("Can Proceed To Begin")
-    newTerm("main_shell")
+    newTerm("main-shell")
     for(var i=0;i < term.length;i++) {
         ipc.send('resize', {cols: term[i].cols, rows: term[i].rows, name: term[i].name})
     }
@@ -61,6 +63,7 @@ function closeTerm(name) {
     ipc.send('kill', {name: name})
     document.getElementById("tab-" + name).remove()
     document.getElementById(name).remove()
+    curTerm = Object.keys(term).indexOf(name) - 1 == -1 ? Object.keys(term)[Object.keys(term).length - 1] : Object.keys(term)[Object.keys(term).indexOf(name) - 1]
     delete term[name]
 }
 
@@ -76,7 +79,15 @@ setInterval(function() {
 
 setInterval(function() {
         for(var i=0;i < Object.keys(term).length;i++) {
-            fitAddon.fit()
+            term[Object.keys(term)[i]].fitA.fit()
             ipc.send('resize', {cols: term[Object.keys(term)[i]].cols, rows: term[Object.keys(term)[i]].rows, name: Object.keys(term)[i]})
         }
+
 }, 5000)
+setInterval(function() {
+    let tabs = document.querySelectorAll("#tabs>span")
+        for(var i=0;i < tabs.length;i++) {
+            tabs[i].classList.remove("selected")
+            if (tabs[i].id.indexOf("tab-" + curTerm) > -1) tabs[i].className += " selected"
+        }
+}, 50)
