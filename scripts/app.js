@@ -16,6 +16,8 @@ document.body.onkeydown = function(event) {
     }
 }
 
+
+
 function closeapp() {
     win.close()
 }
@@ -39,23 +41,40 @@ const template = [
         {
             label: 'New Tab',
             click() {
-                newTerm(defaultShell + Math.round(Math.floor(Math.random() * 1000) + 9999))
+                newTerm(defaultShellName + Math.round(Math.floor(Math.random() * 1000) + 9999))
             }
-        },
-        {
-            role: 'redo'
         },
         {
             type: 'separator'
         },
         {
-            role: 'cut'
-        },
+            label: 'Close',
+            click() {
+                closeapp()
+            }
+        }
+    ]
+},
+{
+    label: 'Edit',
+    submenu: [
         {
             role: 'copy'
         },
         {
             role: 'paste'
+        },
+        {
+            role: 'selectAll'
+        },
+        {
+            type: 'separator'
+        },
+        {
+            label: 'Preferences',
+            click() {
+                
+            }
         }
     ]
 },
@@ -97,7 +116,23 @@ const template = [
             role: 'minimize'
         },
         {
+            label: 'Maximize',
+            click() {
+               if (win.isMaximized()) {
+                    win.unmaximize()
+                } else {
+                    win.maximize()
+                } 
+            }
+        },
+        {
             role: 'close'
+        },
+        {
+            type: 'separator'
+        },
+        {
+            role: 'togglefullscreen'
         }
     ]
 },
@@ -106,7 +141,7 @@ const template = [
     role: 'help',
     submenu: [
         {
-            label: 'Learn More'
+            role: 'about'
         }
     ]
 }

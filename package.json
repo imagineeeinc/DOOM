@@ -1,6 +1,6 @@
 {
   "name": "doom",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A powerfully small terminal emulator, THE TERMINAL OF DOOM",
   "main": "application.js",
   "scripts": {
@@ -63,6 +63,7 @@
     "dotenv": "^8.6.0",
     "ejs": "^3.1.6",
     "electron-reload": "^1.5.0",
+    "electron-store": "^8.0.0",
     "express": "^4.17.1",
     "node-pty": "^0.10.1",
     "socket.io": "^4.1.2",

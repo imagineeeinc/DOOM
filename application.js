@@ -5,7 +5,10 @@ const { BrowserWindow } = require('electron')
 const { ipcMain } = require('electron')
 const path = require("path")
 
+const eleStore = require('electron-store')  
+
 const termHandler = require("./scripts/terminal-handeler")
+const ver = "1.0.3"
 
 var term = {}
 
@@ -79,6 +82,7 @@ function createTray() {
 app.whenReady().then(() => {
   mainWindow = createWindow()
   mainWindow.maximize()
+  eleStore.initRenderer()
   /*
   setTimeout(() => {
     console.log("allowed to start")
@@ -118,7 +122,15 @@ app.on('activate', () => {
   }
 })
 */
-app.setAboutPanelOptions({ applicationName: "DOOM"})
+app.setAboutPanelOptions({
+  applicationName: "DOOM", 
+  applicationVersion: ver,
+  version: ver,
+  credits: "Imagineee",
+  authors: "Imagineee"
+  copyright: "© 2021 Imagineee",
+  //iconPath
+})
 
 
 app.on('window-all-closed', () => {

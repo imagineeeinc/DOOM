@@ -9,7 +9,7 @@ var shell = os.platform() === 'win32' ? 'cmd.exe' : 'bash';
 
 class newTerm {
     constructor(callback, name, dimen, cShell) {
-        var ptyProcess = pty.spawn(cShell || shell, [], {
+        var ptyProcess = pty.spawn(cShell, [], {
             name: name || 'DOOM Terminal',
             cols: dimen.col,
             rows: dimen.row,

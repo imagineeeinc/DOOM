@@ -1,6 +1,13 @@
 var term = {}
-const os = require('os')
-var defaultShell = os.platform() === 'win32' ? 'cmd.exe' : 'bash';
+let shells = store.get("shells")
+var defaultShell
+var defaultShellName
+if (shells.defaultShell === "$first_list") {
+    defaultShell = shells.shells[0].location
+    defaultShellName = shells.shells[0].name
+} else {
+    defaultShell = shells.shells[shells.defaultShell].location
+}
 const fitAddon = new FitAddon()
 var last_size = {x:0,y:0}
 var curTerm
@@ -47,7 +54,7 @@ ipc.send('canIstart')
 
 ipc.on('allowedToBegin', (event, arg) => {
     console.log("Can Proceed To Begin")
-    newTerm("main-shell")
+    newTerm("main-shell", defaultShell)
     for(var i=0;i < term.length;i++) {
         ipc.send('resize', {cols: term[i].cols, rows: term[i].rows, name: term[i].name})
     }
