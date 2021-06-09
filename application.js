@@ -127,8 +127,8 @@ app.setAboutPanelOptions({
   applicationVersion: ver,
   version: ver,
   credits: "Imagineee",
-  authors: "Imagineee"
-  copyright: "© 2021 Imagineee",
+  authors: "Imagineee",
+  copyright: "© 2021 Imagineee"
   //iconPath
 })
 
