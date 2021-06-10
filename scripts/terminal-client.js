@@ -12,13 +12,63 @@ const fitAddon = new FitAddon()
 var last_size = {x:0,y:0}
 var curTerm
 
+var stls = getComputedStyle(document.documentElement)
+//.getPropertyValue('--my-variable-name')
+
 var closeBtn = document.createElement("button")
 closeBtn.innerHTML = "<img src='../file/icons/close.svg'>"
 
 function newTerm(name, shell) {
     term[name] = new Terminal({
-        cursorBlink: "bar"
+        cursorBlink: "bar",
+        allowTransparency: true,
+        theme: {
+            foreground: '#ffffff',
+            background: '#000',
+            cursor: '#ffffff',
+            selection: 'rgba(255, 255, 255, 0.3)',
+            black: '#000000',
+            red: '#e06c75',
+            brightRed: '#e06c75',
+            green: '#A4EFA1',
+            brightGreen: '#A4EFA1',
+            brightYellow: '#EDDC96',
+            yellow: '#EDDC96',
+            magenta: '#e39ef7',
+            brightMagenta: '#e39ef7',
+            cyan: '#5fcbd8',
+            brightBlue: '#5fcbd8',
+            brightCyan: '#5fcbd8',
+            blue: '#5fcbd8',
+            white: '#d0d0d0',
+            brightBlack: '#808080',
+            brightWhite: '#ffffff'
+        }
     })
+    /*
+    Template:
+
+    foreground: '#ffffff',
+        background: '#000',
+        cursor: '#ffffff',
+        selection: 'rgba(255, 255, 255, 0.3)',
+        black: '#000000',
+        red: '#e06c75',
+        brightRed: '#e06c75',
+        green: '#A4EFA1',
+        brightGreen: '#A4EFA1',
+        brightYellow: '#EDDC96',
+        yellow: '#EDDC96',
+        magenta: '#e39ef7',
+        brightMagenta: '#e39ef7',
+        cyan: '#5fcbd8',
+        brightBlue: '#5fcbd8',
+        brightCyan: '#5fcbd8',
+        blue: '#5fcbd8',
+        white: '#d0d0d0',
+        brightBlack: '#808080',
+        brightWhite: '#ffffff'
+        */
     term[name].name = name
 
     let doc = document.createElement("div")

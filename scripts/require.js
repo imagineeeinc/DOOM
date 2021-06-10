@@ -51,4 +51,36 @@ if (store.get('shells') == undefined) {
         defaultShell: "$first_list"
     })
 }
-console.log(store.get('shells'))
+//store.delete("theming")
+if (store.get('theming') == undefined) {
+    store.set("theming", {
+        css: `
+            :root {
+                --foreground: #ffffff;
+                --background: #000;
+                --cursor: #ffffff;
+                --selection: rgba(184, 172, 231, 0.6);
+                --black: #000000;
+                --red: #e06c75;
+                --brightRed: #e06c75;
+                --green: #A4EFA1;
+                --brightGreen: #A4EFA1;
+                --brightYellow: #EDDC96;
+                --yellow: #EDDC96;
+                --magenta: #e39ef7;
+                --brightMagenta: #e39ef7;
+                --cyan: #5fcbd8;
+                --brightBlue: #5fcbd8;
+                --brightCyan: #5fcbd8;
+                --blue: #5fcbd8;
+                --white: #d0d0d0;
+                --brightBlack: #808080;
+                --brightWhite: #ffffff;
+            }
+        `
+    })
+}
+document.getElementById("theme").innerHTML = store.get('theming').css
+setInterval(function() {
+    document.getElementById("theme").innerHTML = store.get('theming').css
+}, 500)
