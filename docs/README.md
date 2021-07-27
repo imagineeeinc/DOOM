@@ -62,3 +62,5 @@ The big black box Bellow the Tab list is the terminal it self. And thats it.
 - Ouick New Terminal instance: `Ctrl+Shift+N`
 - Switch to Terminal instance on the left: `Ctrl+⬅`
 - Switch to Terminal instance on the right: `Ctrl+➡`
+- Minimize: `Ctrl+Shift+⬇`
+- Maximize: `Ctrl+Shift+⬆`
