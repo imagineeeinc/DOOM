@@ -1,8 +1,17 @@
 # DOOM Documentation
 ## Contents
+- [About](#About)
 - [Instalation](#Instalation)
 - [Build](#Build)
-- [First Time](#First Time)
+- [First Time](#First-Time)
+- [Key Bindings](#Key-Bindings)
+
+# About
+<p align="center">
+  <img src="icon.png" width="30%">
+</p>
+DOOM is a powerfully small application for command-line interface and emulating terminals. It is made with web standards. It is focused at being primarily around speed, stability, customiziblity, beautiful design and extra features.
+
 
 # Instalation
 __NOTE: currently only windows executables are avalible, if you want for your platform, please bulid from source by following the [build guide](#Build)__
@@ -36,3 +45,17 @@ npm run dist
 # build executable
 ```
 # First Time
+The First Time You open DOOM you will be greated with a dark window and the default shell of your OS.
+
+You will see a tab at the top of the screen. This is the Tab list there will be more tabs the more terminals instances you open.
+
+To the right of the screen at the very top are the window controls like close, maximize, minimize; on the left of the screen is your Global menu with options for you to use.
+
+On right of the Tab List there is two buttons, one is a plus icon, this is the new instace button and will open a new instance of the default shell; the one next to it is a drop down arrow which is the more shells menu with more shells if you your system has any (on windows powershell, and wsl if installed, but you need to set that up, for now you can type wsl in the cmd to get wsl).
+
+The big black box Bellow the Tab list is the terminal it self. And thats it.
+
+# Key Bindings
+- Copy: `Ctrl+C` (make sure to select the text needed to copy or it will go to the currently selected shell)
+- Paste: `Ctrl+Shift+V`
+- Reload Window: `Ctrl+Shift+R`
