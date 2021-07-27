@@ -64,3 +64,4 @@ The big black box Bellow the Tab list is the terminal it self. And thats it.
 - Switch to Terminal instance on the right: `Ctrl+➡`
 - Minimize: `Ctrl+Shift+⬇`
 - Maximize: `Ctrl+Shift+⬆`
+- Emoji Picker: `Ctrl+;`
