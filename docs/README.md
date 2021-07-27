@@ -59,3 +59,6 @@ The big black box Bellow the Tab list is the terminal it self. And thats it.
 - Copy: `Ctrl+C` (make sure to select the text needed to copy or it will go to the currently selected shell)
 - Paste: `Ctrl+Shift+V`
 - Reload Window: `Ctrl+Shift+R`
+- Ouick New Terminal instance: `Ctrl+Shift+N`
+- Switch to Terminal instance on the left: `Ctrl+⬅`
+- Switch to Terminal instance on the right: `Ctrl+➡`
