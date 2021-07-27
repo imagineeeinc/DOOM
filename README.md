@@ -1,5 +1,23 @@
 # DOOM
-A powerfully small terminal emulator, THE TERMINAL OF DOOM
+<p align="center">
+  <img src="build/icon.png" width="30%">
+</p>
+DOOM is a powerfully small application for command-line interface and emulating terminals. It is made with web standards. It is focused at being primarily around speed, stability, customiziblity, beautiful design and extra features.
+
+# Usage/ Instalation
+To use on your system, download the latest build from [here](https://github.com/imagineeeinc/DOOM/releases/latest)
+
+Or, [build from source](#Build)
+
+# Features Planned
+There are features that are still being implemented
+Few are:
+- User settings
+- Themes
+- Multiple Shells
+- customizing settings
+- split terminal
+- extension (probably not)
 
 # Build
 ### software
