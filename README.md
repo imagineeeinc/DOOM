@@ -18,6 +18,12 @@ Few are:
 - customizing settings
 - split terminal
 - extension (probably not)
+- Remote connections
+  - ssh
+  - vnc (probably not)
+  - DOOM Remote conection (a npm module will be made and will use web sockets or webRTC to communicate with the host to the DOOM Appliction, you have to install the module on the host computer, start the server, and then connect to it with the client)
+  - DOOM remote connection[host] (a feature that allows you to become the host)
+  - Phone Book (list of remote connections)
 
 # Build
 ### software
