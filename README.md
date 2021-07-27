@@ -2,9 +2,11 @@
 <p align="center">
   <img src="build/icon.png" width="30%">
 </p>
-DOOM is a powerfully small application for command-line interface and emulating terminals. It is made with web standards. It is focused at being primarily around speed, stability, customiziblity, beautiful design and extra features.
+DOOM is a powerfully small application for command-line interface and emulating terminals.
+It is focused at being primarily around speed, stability, customizability, beautiful design and extra features.
+Additionally it is made with web standards.
 
-# Usage/ Instalation
+# Usage/ Installation
 To use on your system, download the latest build from [here](https://github.com/imagineeeinc/DOOM/releases/latest)
 
 Or, [build from source](#Build)
