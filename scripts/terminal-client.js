@@ -23,26 +23,26 @@ function newTerm(name, shell) {
         cursorBlink: "bar",
         allowTransparency: true,
         theme: {
-            foreground: '#ffffff',
-            background: '#000',
-            cursor: '#ffffff',
-            selection: 'rgba(255, 255, 255, 0.3)',
-            black: '#000000',
-            red: '#e06c75',
-            brightRed: '#e06c75',
-            green: '#A4EFA1',
-            brightGreen: '#A4EFA1',
-            brightYellow: '#EDDC96',
-            yellow: '#EDDC96',
-            magenta: '#e39ef7',
-            brightMagenta: '#e39ef7',
-            cyan: '#5fcbd8',
-            brightBlue: '#5fcbd8',
-            brightCyan: '#5fcbd8',
-            blue: '#5fcbd8',
-            white: '#d0d0d0',
-            brightBlack: '#808080',
-            brightWhite: '#ffffff'
+            foreground: stls.getPropertyValue('---foregorund'),
+            background: stls.getPropertyValue('--backgorund'),
+            cursor: stls.getPropertyValue('--cursor'),
+            selection: stls.getPropertyValue('--selction'),
+            black: stls.getPropertyValue('--black'),
+            red: stls.getPropertyValue('--red'),
+            brightRed: stls.getPropertyValue('--brightRed'),
+            green: stls.getPropertyValue('--green'),
+            brightGreen: stls.getPropertyValue('--brightGreen'),
+            brightYellow: stls.getPropertyValue('--brightYellow'),
+            yellow: stls.getPropertyValue('--yellow'),
+            magenta: stls.getPropertyValue('--magenta'),
+            brightMagenta: stls.getPropertyValue('--brightMagent'),
+            cyan: stls.getPropertyValue('--cyan'),
+            brightBlue: stls.getPropertyValue('--brightCyan'),
+            brightCyan: stls.getPropertyValue('--brightCyan'),
+            blue: stls.getPropertyValue('--'),
+            white: stls.getPropertyValue('--'),
+            brightBlack: stls.getPropertyValue('--brightBlack'),
+            brightWhite: stls.getPropertyValue('--brightWhite')
         }
     })
     /*
@@ -90,13 +90,19 @@ function newTerm(name, shell) {
     tab.setAttribute("onclick", "openTerm('" + name +"')")
     clo.setAttribute("onclick", "closeTerm('" + name +"')")
     document.getElementById("tabs").append(tab)
-
     ipc.send('newTerm', {name: name, shell: shell, cols: term[name].cols, rows: term[name].rows})
     /*
     term[name].onData((data, ev) => {
         ipc.send('run', {data: data, name: name})
     })
     */
+    if (store.get('shells').startAtHomedir != false) {
+        if (store.get('shells').startCommand == undefined) {
+            ipc.send('run', {data: os.platform() === 'win32' ? "cls && cd "+os.homedir()+" && cmd\r" : "clear && cd "+os.homedir()+"&& bash\r", name: name})
+        } else {
+            ipc.send('run', {data: store.get('shells').startCommand, name: name})
+        }
+    }
     term[name].onKey(({ key }) => {
         if (term[name].hasSelection() && key === "") {
             document.execCommand('copy')
@@ -107,6 +113,7 @@ function newTerm(name, shell) {
         }
     })
     document.getElementById(name).scrollIntoView()
+    document.getElementById(name).focus()
     curTerm = name
 }
 
@@ -164,3 +171,12 @@ document.body.onkeyup = (e) => {
         ipc.send('run', {data: clipboard.readText(), name: curTerm})
     }
 }
+function selectTerm(next) {
+    if (next == "left") {
+        openTerm(Object.keys(term)[Object.keys(term).indexOf(curTerm)-1])
+    } else if (next == "right") {
+        openTerm(Object.keys(term)[Object.keys(term).indexOf(curTerm)+1])
+    }
+}
+document.querySelector('emoji-picker')
+    .addEventListener('emoji-click', event => {ipc.send('run', {data: event.detail.unicode, name: curTerm})});

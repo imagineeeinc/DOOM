@@ -6,12 +6,14 @@
     <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
 
     <link rel="stylesheet" href="../styles/font.css">
-    <link rel="stylesheet" href="../styles/style.css">
+    <link rel="stylesheet" href="../styles/must.css" id="default-style">
+    <link rel="stylesheet" href="../styles/style.css" id="default-style">
     <link rel="stylesheet" href="../node_modules/xterm/css/xterm.css" />
 
     <style id="scroll"></style>
     <style id="theme"></style>
 
+    <script src="../node_modules/emoji-picker-element/index.js" type="module"></script>
     <script src="../node_modules/xterm/lib/xterm.js"></script>
 </head>
 <body onscroll="disableScrolling()" onmousewheel="enableScrolling()" onclick="enableScrolling()" onmousemove="enableScrolling()">
@@ -33,17 +35,71 @@
     </div>
     <div id="terminal-holder">
     </div>
+    <div id="first-time">
+        <button class="close">Close</button>
+        <div style="text-align: center;">
+            <img src="../file/appicons/DOOM.png" width="80px">
+            <h1>DOOM</h1>
+            <h6>THE TERMINAL OF DOOM</h6>
+        </div>
+        <p>
+            DOOM is a powerfully small application for command-line interface and emulating terminals.
+            It is focused at being primarily around speed, stability, customizability, beautiful design and extra features.
+            Additionally it is made with web standards.
+        </p>
+        <hr>
+        <p>
+            <h4>App Details</h4>
+            Developer: <a href="javascript:link('https://imagineeeinc.github.io')">Imagineee</a>
+            <br>
+            App Version: <span id="app-version"></span>
+            <br>
+            Copyright: Copyright © 2021 Imagineee
+            <br>
+            Licence: <a href="javascript:link('https://github.com/imagineeeinc/DOOM/blob/main/LICENSE')">MIT License</a>
+        </p>
+        <hr>
+        <p>
+            <h4>Links</h4>
+            <a href="javascript:link('https://imagineeeinc.github.io')">Developer Imagineee</a>, 
+            <a href="javascript:link('https://github.com/imagineeeinc/DOOM/blob/main/LICENSE')">MIT License</a>, 
+            <a href="javascript:link('https://github.com/imagineeeinc/DOOM')">Repo</a>
+        </p>
+        <hr>
+        <p>
+            <h3>Technical Details</h3>
+            DOOM is currently using Node.js <span id="node-version"></span>,
+            Chromium <span id="chrome-version"></span>,
+            and Electron <span id="electron-version"></span>.
+        </p>
+        <hr>
+        <p>
+            <h4>Info for Nerds/ JS (Node JS) Developers/ Web Developers</h4>
+            <ul>
+                <li>Built on Electron with Electron Builder to bundle</li>
+                <li>It is written in pure HTML, CSS and JavaScript from Scratch</li>
+                <li>It uses the the xterm js library to emulate a terminal in HTML</li>
+                <li>It uses node-pty to open a pseudo terminal in JavaScript to emulate the terminal</li>
+            </ul>
+        </p>
+        <!--<hr>
+        <p>
+            <h4>System Details</h4>
+            <code id="system-details"></code>
+        </p>-->
+    </div>
+    <emoji-picker class="dark"></emoji-picker>
     <script>
         var move = false
         var timeout
         function disableScrolling() {
             setTimeout(function() {
-                document.getElementById("scroll").innerHTML = "::-webkit-scrollbar {display: none}"
+                document.getElementById("scroll").textContent = "::-webkit-scrollbar {display: none}"
                 move = false
             }, 500);
         }
         function enableScrolling() {
-            document.getElementById("scroll").innerHTML = "::-webkit-scrollbar {}"
+            document.getElementById("scroll").textContent = "::-webkit-scrollbar {}"
             move = true
             clearTimeout(timeout)
             timeout = setTimeout(function(){move = false}, 2000)

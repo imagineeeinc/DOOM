@@ -11,12 +11,31 @@ var ipc = require('electron').ipcRenderer
 
 const { FitAddon } = require("xterm-addon-fit")
 const eleStore = require('electron-store')
+const osu = require('node-os-utils')
+/*
+var systemDetails = {
+    cpu: {
+        count: osu.cpu.count(),
+        model: osu.cpu.model()
+    }
+}
+*/
 
 const fs = require('fs')
 const path = require('path')
 const os = require('os')
 
+if (process.env.NODE_ENV !== 'production') {
+    require('dotenv').config();
+}
+const sleep = (ms) => {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+};
+var appVersion = require("electron").remote.app.getVersion();
 var store = new eleStore()
+function link(link) {
+    shell.openExternal(link)
+}
 
 let startShells = os.platform() === 'win32' ? [
     {
@@ -48,13 +67,15 @@ if (store.get('shells') == undefined) {
     store.set("shells", {
         os: os.type(),
         platform: os.platform(),
+        startAtHomedir: false,
         shells: startShells,
         defaultShell: "$first_list"
     })
 }
 //store.delete("theming")
-if (store.get('theming') == undefined) {
-    store.set("theming", {
+if (store.get('themeing') == undefined) {
+    store.set("themeing", {
+        forceOffDefault: false,
         css: `
             :root {
                 --foreground: #ffffff;
@@ -81,7 +102,36 @@ if (store.get('theming') == undefined) {
         `
     })
 }
+if (store.get('firstTime') == undefined) {
+    store.set("firstTime", true)
+    firstTime()
+    if (process.env.DEV == "true") {
+        store.delete("firstTime")
+    }
+}
 document.getElementById("theme").textContent = store.get('theming').css
 setInterval(function() {
-    document.getElementById("theme").textContent = store.get('theming').css
+    document.getElementById("theme").textContent = store.get('themeing').css
+    if (store.get('themeing').forceOffDefault == true) {
+        document.getElementById("default-style").src = ""
+    } else {
+        document.getElementById("default-style").src = "../styles/style.css"
+    }
 }, 500)
+
+function firstTime() {
+    
+    const replaceText = (selector, text) => {
+        const element = document.getElementById(selector)
+        if (element) element.innerText = text
+    }
+    document.getElementById('app-version').innerText = appVersion
+    //document.getElementById('system-details').innerText = JSON.stringify(systemDetails)
+    for (const dependency of ['chrome', 'node', 'electron']) {
+        replaceText(`${dependency}-version`, process.versions[dependency])
+    }
+    document.getElementById("first-time").style.display="block"
+    document.querySelector("#first-time > .close").onmouseup = () => {
+        document.getElementById("first-time").style.display="none"
+    }
+}

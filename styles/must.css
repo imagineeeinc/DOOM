@@ -1,0 +1,57 @@
+button {
+	color: var(--foreground);
+	outline: none;
+	border: none;
+	border-radius: 3px;
+	background-color: transparent;
+	margin: 0 !important;
+	padding: 2px;
+	font-family: inherit;
+}
+button:hover {
+	background-color: rgba(255, 255, 255, 0.1);
+}
+a {
+	color: rgb(114, 97, 221);
+}
+hr {
+	height: 0px;
+	border-top: .5px solid var(--foreground);
+	background-color: transparent;
+	width: 75%;
+}
+#first-time {
+	display: none;
+	position: absolute;
+	top: 10vh;
+	left: 15vw;
+	width: 65vw;
+	max-height: 80vh;
+	background-color: rgb(8, 8, 8);
+	padding: 2vw;
+	box-shadow: 0 0 20px rgb(17, 17, 17),
+	0 0 40px rgb(17, 17, 17),
+	0 0 60px rgb(17, 17, 17),
+	0 0 80px rgb(17, 17, 17),
+	0 0 100px rgb(17, 17, 17),
+	0 0 120px rgb(17, 17, 17),
+	0 0 140px rgb(17, 17, 17),
+	0 0 160px rgb(17, 17, 17),
+	0 0 180px rgb(17, 17, 17),
+	0 0 200px rgb(17, 17, 17);
+	z-index: 3;
+	overflow-y: scroll;
+	border-radius: 12px;
+}
+#first-time > .close {
+	position: absolute;
+	right: 2vw;
+}
+emoji-picker {
+	width: 350px;
+	height: 500px;
+	position: absolute;
+	top: 0; left: 0;
+	display: none;
+	z-index: 5;
+}

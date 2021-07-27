@@ -8,7 +8,7 @@ const path = require("path")
 const eleStore = require('electron-store')  
 
 const termHandler = require("./scripts/terminal-handeler")
-const ver = "1.0.3"
+const ver = app.getVersion()
 
 var term = {}
 
@@ -75,13 +75,6 @@ ipcMain.on('reload', (event, arg) => {
 function send(data, nm) {
   mainWindow.webContents.send('printTerm', {data: data, name: nm, file: term[nm].pty._file})
 }
-/*
-app.on('activate', () => {
-  if (BrowserWindow.getAllWindows().length === 0) {
-    createWindow()
-  }
-})
-*/
 app.setAboutPanelOptions({
   applicationName: "DOOM", 
   applicationVersion: ver,
@@ -93,10 +86,8 @@ app.setAboutPanelOptions({
 })
 
 
-app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
-    app.quit()
-  }
+app.on('window-all-closed', function () {
+  if (process.platform !== 'darwin') app.quit()
 })
 app.on('will-quit', () => {
   globalShortcut.unregisterAll()

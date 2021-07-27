@@ -1,8 +1,8 @@
-if (process.env.NODE_ENV !== 'production') {
-    require('dotenv').config();
-}
-
+var mousePos = {x:0,y:0}
+var curEle = null
 document.body.onkeydown = function(event) {
+    //console.log(event.keyCode)
+    //<: 37, >: 39, /\: 38, \/: 40
     if (process.env.DEV != "true") {
         if (event.keyCode === 73 && event.shiftKey === true && event.ctrlKey === true) {
             event.preventDefault()
@@ -11,12 +11,42 @@ document.body.onkeydown = function(event) {
     if (event.keyCode === 82 && event.ctrlKey === true) {
         event.preventDefault()
     }
+    if (event.keyCode === 78 && event.shiftKey === true && event.ctrlKey === true) {
+        newTerm(defaultShellName + Math.round(Math.floor(Math.random() * 1000) + 9999))
+    }
+    if (event.keyCode === 67 && event.shiftKey === true && event.ctrlKey === true) {
+        closeTerm(curTerm)
+    }
+    if (event.keyCode === 37 && event.ctrlKey === true) {
+        selectTerm("left")
+    }
+    if (event.keyCode === 39 && event.ctrlKey === true) {
+        selectTerm("right")
+    }
+    if (event.keyCode === 38 && event.shiftKey === true && event.ctrlKey === true) {
+        maximize()
+    }
+    if (event.keyCode === 40 && event.shiftKey === true && event.ctrlKey === true) {
+        minimize()
+    }
     if (event.keyCode === 82 && event.shiftKey === true && event.ctrlKey === true) {
         ipc.send('reload')
     }
+    if (event.keyCode === 186 && event.ctrlKey === true) {
+        emojiPick()
+    }
 }
-
-
+document.onclick = function(event) {
+    if (curEle != document.querySelector('emoji-picker')) {
+        document.querySelector('emoji-picker').style.display = "none";
+    }
+}
+document.onmousemove = (e) => {mousePos = {x:e.screenX,y:e.screenY};curEle = e.target}
+function emojiPick() {
+    document.querySelector('emoji-picker').style.left = mousePos.x+"px"
+    document.querySelector('emoji-picker').style.top = mousePos.y+"px"
+    document.querySelector('emoji-picker').style.display = "block"
+}
 
 function closeapp() {
     win.close()
@@ -25,14 +55,20 @@ document.getElementById("close").onmouseup = function() {
     closeapp()
 }
 document.getElementById("maximize").onmouseup = function() {
+    maximize()
+}
+function maximize() {
     if (win.isMaximized()) {
         win.unmaximize()
     } else {
         win.maximize()
     }
 }
-document.getElementById("minimize").onmouseup = function() {
+function minimize() {
     win.minimize()
+}
+document.getElementById("minimize").onmouseup = function() {
+    minimize()
 }
 const template = [
 {
