@@ -92,9 +92,19 @@ function newTerm(name, shell) {
     document.getElementById("tabs").append(tab)
 
     ipc.send('newTerm', {name: name, shell: shell, cols: term[name].cols, rows: term[name].rows})
-
+    /*
     term[name].onData((data, ev) => {
         ipc.send('run', {data: data, name: name})
+    })
+    */
+    term[name].onKey(({ key }) => {
+        if (term[name].hasSelection() && key === "") {
+            document.execCommand('copy')
+        } else if (term[name].hasSelection() && key === "") {
+            document.execCommand('paste')
+        } else {
+            ipc.send('run', {data: key, name: name})
+        }
     })
     document.getElementById(name).scrollIntoView()
     curTerm = name
@@ -148,3 +158,9 @@ setInterval(function() {
             if (tabs[i].id.indexOf("tab-" + curTerm) > -1) tabs[i].className += " selected"
         }
 }, 50)
+
+document.body.onkeyup = (e) => {
+    if (e.keyCode == 86 && e.ctrlKey == true && e.shiftKey == true) {
+        ipc.send('run', {data: clipboard.readText(), name: curTerm})
+    }
+}

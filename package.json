@@ -1,15 +1,17 @@
 {
   "name": "doom",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A powerfully small terminal emulator, THE TERMINAL OF DOOM",
   "main": "application.js",
   "scripts": {
     "start": "electron .",
     "rebuild": "cd .\\node_modules\\node-pty && node-gyp rebuild --target=10.1.5 --arch=x64 --target_platform=darwin --dist-url=https://atom.io/download/atom-shell",
+    "install": "npm install && npm run rebuild",
     "pack": "electron-builder --dir",
-    "dist": "electron-builder",
+    "dist": "electron-builder -m -l -w",
     "dist-win": "electron-builder --win",
     "dist-win-32": "electron-builder --win --ia32",
+    "dist-win-all": "electron-builder --win --ia32 --armv7l --arm64",
     "dist-mac": "electron-builder --mac",
     "dist-linux": "electron-builder --linux"
   },
@@ -20,15 +22,15 @@
   "keywords": [
     "notepad"
   ],
-  "author": "imagineee",
+  "author": "imagineee <imagineeeinc@users.noreply.github.com> ",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/imagineeeinc/DOOM/issues"
   },
   "homepage": "https://github.com/imagineeeinc/DOOM",
   "devDependencies": {
-    "electron": "^10.1.5",
-    "electron-builder": "^22.9.1"
+    "electron": "^10.4.7",
+    "electron-builder": "^22.11.7"
   },
   "build": {
     "appId": "DOOM",
@@ -36,6 +38,7 @@
     "copyright": "Copyright © 2021 Imagineee",
     "mac": {
       "category": "public.app-category.developer-tools",
+      "darkModeSupport": true,
       "target": [
         "default",
         "dmg",
@@ -43,6 +46,7 @@
       ]
     },
     "win": {
+      "publisherName": "Imagineee",
       "target": [
         "portable",
         "zip",
@@ -50,6 +54,7 @@
       ]
     },
     "linux": {
+      "category": "Development",
       "target": [
         "AppImage",
         "apk",
@@ -61,12 +66,9 @@
   },
   "dependencies": {
     "dotenv": "^8.6.0",
-    "ejs": "^3.1.6",
     "electron-reload": "^1.5.0",
     "electron-store": "^8.0.0",
-    "express": "^4.17.1",
     "node-pty": "^0.10.1",
-    "socket.io": "^4.1.2",
     "xterm": "^4.12.0",
     "xterm-addon-fit": "^0.5.0"
   },

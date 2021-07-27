@@ -33,50 +33,10 @@ function createWindow () {
       spellcheck: true
     }
   })
-  let tray = null
-  win.on('minimize', function (event) {
-    if (firstClose === false) {
-      event.preventDefault();
-      tray = createTray();
-    } else if (firstClose === true) {
-      firstClose = false
-    }
-  });
-
-  win.on('restore', function (event) {
-    if (firstClose === false) {
-      win.show();
-      tray.destroy();
-    } else if (firstClose === true) {
-      firstClose = false
-    }
-  })
   win.loadFile('views/index.html')
 
   return win
   //win.webContents.openDevTools()
-}
-function createTray() {
-  appIcon = new Tray(/*path.join(__dirname, "cloud_fun.ico")*/"file/example.ico");
-  const contextMenu = Menu.buildFromTemplate([
-      {
-          label: 'Open', click: function () {
-              mainWindow.show();
-          }
-      },
-      {
-          label: 'Shut Down App', click: function () {
-              app.isQuiting = true;
-              app.quit();
-          }
-      }
-  ]);
-  appIcon.on('double-click', function (event) {
-      mainWindow.show();
-  });
-  appIcon.setToolTip('DOOM');
-  appIcon.setContextMenu(contextMenu);
-  return appIcon;
 }
 
 app.whenReady().then(() => {

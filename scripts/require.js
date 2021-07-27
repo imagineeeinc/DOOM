@@ -3,6 +3,7 @@ const { BrowserWindow } = require("electron");
 const { app } = require("electron");
 const { remote } = require('electron')
 const { shell } = require('electron')
+const { clipboard } = require('electron')
 const { Menu, MenuItem } = remote
 win = remote.getCurrentWindow()
 const contents = win.webContents
@@ -80,7 +81,7 @@ if (store.get('theming') == undefined) {
         `
     })
 }
-document.getElementById("theme").innerHTML = store.get('theming').css
+document.getElementById("theme").textContent = store.get('theming').css
 setInterval(function() {
-    document.getElementById("theme").innerHTML = store.get('theming').css
+    document.getElementById("theme").textContent = store.get('theming').css
 }, 500)
