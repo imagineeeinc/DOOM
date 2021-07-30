@@ -1,10 +1,15 @@
 # DOOM Documentation
-## Contents
+## Table Of Contents
 - [About](#About)
+- [Development information](#Development-Information)
+  - [The Stack](#The-Stack)
+  - [Extra Notices](#Extra-Notices)
 - [Instalation](#Instalation)
 - [Build](#Build)
 - [First Time](#First-Time)
 - [Key Bindings](#Key-Bindings)
+- [Features](#Features)
+  - [Emoji Picker](#Emoji-Picker)
 
 # About
 <p align="center">
@@ -12,6 +17,15 @@
 </p>
 DOOM is a powerfully small application for command-line interface and emulating terminals. It is made with web standards. It is focused at being primarily around speed, stability, customiziblity, beautiful design and extra features.
 
+## Development Information
+Extra information on the develoment
+
+### The Stack
+The app is built on node js with electron js to make ntive apps, it uses electron builder to build to native executables. The app has been built on web technolgies and standards. It uses xterm js to emulate terminal in html, node-pty to open psuedo terminals in node js.
+
+### Extra Notices
+- Any problems with xterm js or node-pty, do not make a issue in this project, make it in their official repo.
+- This is just a side project and not meant to be a mainstrem terminal emulator.
 
 # Instalation
 __NOTE: currently only windows executables are avalible, if you want for your platform, please bulid from source by following the [build guide](#Build)__
@@ -56,6 +70,7 @@ On right of the Tab List there is two buttons, one is a plus icon, this is the n
 The big black box Bellow the Tab list is the terminal it self. And thats it.
 
 # Key Bindings
+Make sure to swap the Ctrl out for Cmd for Mac users
 - Copy: `Ctrl+C` (make sure to select the text needed to copy or it will go to the currently selected shell)
 - Paste: `Ctrl+Shift+V`
 - Reload Window: `Ctrl+Shift+R`
@@ -65,3 +80,15 @@ The big black box Bellow the Tab list is the terminal it self. And thats it.
 - Minimize: `Ctrl+Shift+⬇`
 - Maximize: `Ctrl+Shift+⬆`
 - Emoji Picker: `Ctrl+Shift+;`
+
+# Features
+There are amzing features avalible in DOOM, Read on to learn more
+## Emoji Picker
+Built into the app is emoji support.
+
+Just by using the keyboard shortcut of `Ctrl+Shift+;` (or `Cmd+Shift+;` for Mac users`) will open up the emoji picker, now use it to your hearts content every where and in your [git commit messages](https://gitmoji.dev/).
+
+__Know Problems__
+- your system default emoji picker won't work due to certain problems with xterm js
+- some times using emojis in when typing will show as unknown charecter, but work when printed by the shell; this might be due to node-pty, cmd on windows or xter js.
+- emojis taking up space of two, this is a known problem in xterm js, so we have to wait until they fix it.
