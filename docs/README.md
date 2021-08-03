@@ -51,7 +51,7 @@ git clone https://github.com/imagineeeinc/DOOM.git
 # clone repository
 npm i
 # install dependencies
-npm run rebuild
+npm run building:deps
 # rebuild node-pty
 npm start
 # for testing
