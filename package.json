@@ -5,7 +5,7 @@
   "main": "application.js",
   "scripts": {
     "start": "electron .",
-    "rebuild": "cd .\\node_modules\\node-pty && node-gyp rebuild --target=10.1.5 --arch=x64 --target_platform=darwin --dist-url=https://atom.io/download/atom-shell",
+    "rebuild:deps": "cd .\\node_modules\\node-pty && node-gyp rebuild --target=10.1.5 --arch=x64 --target_platform=darwin --dist-url=https://atom.io/download/atom-shell",
     "install": "npm install && npm run rebuild",
     "pack": "electron-builder --dir",
     "dist": "electron-builder -m -l -w",
