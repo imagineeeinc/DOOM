@@ -4,6 +4,8 @@ const { app, Tray, Menu, dialog, globalShortcut } = require('electron')
 const { BrowserWindow } = require('electron')
 const { ipcMain } = require('electron')
 const path = require("path")
+const os = require('os')
+const fs = require('fs')
 
 const eleStore = require('electron-store')  
 
@@ -38,7 +40,6 @@ function createWindow () {
   return win
   //win.webContents.openDevTools()
 }
-
 app.whenReady().then(() => {
   mainWindow = createWindow()
   mainWindow.maximize()
@@ -49,6 +50,9 @@ app.whenReady().then(() => {
     mainWindow.webContents.send('allowedToBegin', {begin: true})
   }, 1000)*/
 })
+//TODO: move form: launch app => => start window => window ready => start psudo term => draw
+//      to :       launch app => start psudo term and start window => window ready => draw
+//      so less steps
 ipcMain.on('newTerm', (eve, arg) => {
   term[arg.name]= new termHandler.newTerm(function(data) {var nm = arg.name;send(data, nm)}, arg.name, {col: arg.cols, row: arg.rows}, arg.shell || undefined)
 })

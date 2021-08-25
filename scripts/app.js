@@ -40,6 +40,10 @@ document.onclick = function(event) {
     if (curEle != document.querySelector('emoji-picker')) {
         document.querySelector('emoji-picker').style.display = "none";
     }
+    if (curEle != document.getElementById('add-more-menu') && curEle != document.getElementById('add-more-tab')) {
+        document.getElementById('add-more-menu').style.display = "none";
+    }
+    //TODO: more terms
 }
 document.onmousemove = (e) => {mousePos = {x:e.screenX,y:e.screenY};curEle = e.target}
 function emojiPick() {
@@ -154,7 +158,7 @@ const template = [
         {
             label: 'Maximize',
             click() {
-               if (win.isMaximized()) {
+                if (win.isMaximized()) {
                     win.unmaximize()
                 } else {
                     win.maximize()
@@ -196,6 +200,11 @@ menu.append(new MenuItem ({
 document.getElementById("menu").onclick = (e) => {
     e.preventDefault()
     menu.popup(remote.getCurrentWindow())
+}
+
+document.getElementById("add-more-tab").onclick = (e) => {
+    e.preventDefault()
+    document.getElementById('add-more-menu').style.display = 'block'
 }
 
 setInterval(function(){

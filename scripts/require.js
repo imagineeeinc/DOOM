@@ -24,6 +24,25 @@ var systemDetails = {
 const fs = require('fs')
 const path = require('path')
 const os = require('os')
+try {
+    if (fs.existsSync(path.join(os.homedir()+"/.doomrc"))) {
+        console.log('.doomrc exists')
+    } else {
+        console.log(".doomrc dosnt exist")
+        const doomrcMaker = require("../scripts/doomrc.js")
+        fs.writeFileSync(path.join(os.homedir()+"/.doomrc"),doomrcMaker.basic)
+        console.log('wrote .doomrc')
+    }
+} catch(err){
+    console.log(".doomrc dosnt exist")
+        const doomrcMaker = require("../scripts/doomrc.js")
+        fs.writeFileSync(path.join(os.homedir()+"/.doomrc"),doomrcMaker.basic)
+        console.log('wrote .doomrc')
+}
+
+console.log(fs.readFileSync(path.join(os.homedir()+"/.doomrc"), 'utf8'))
+
+const config = JSON.parse(fs.readFileSync(path.join(os.homedir()+"/.doomrc"), 'utf8'))
 
 if (process.env.NODE_ENV !== 'production') {
     require('dotenv').config();
@@ -36,72 +55,6 @@ var store = new eleStore()
 function link(link) {
     shell.openExternal(link)
 }
-
-let startShells = os.platform() === 'win32' ? [
-    {
-        name: "cmd",
-        location: "C:\\Windows\\System32\\cmd.exe",
-        icon: "$cmd.png"
-    },
-    {
-        name: "powershell",
-        location: "C:\\Windows\\System32\\WindowsPowershell\\v1.0\\powershell.exe",
-        icon: "$powershell.png"
-    }
-] : [
-    {
-        name: 'bash',
-        location: "bash",
-        icon: "$bash.png"
-    },
-    //for mac users
-    {
-        name: os.type() === 'Darwin' ? 'terminal.app' : 'bash',
-        location: os.type() === 'Darwin' ? 'Terminal.app' : 'bash',
-        icon: "$bterminal.app.png"
-    }
-]
-
-//store.delete("shells")
-if (store.get('shells') == undefined) {
-    store.set("shells", {
-        os: os.type(),
-        platform: os.platform(),
-        startAtHomedir: false,
-        shells: startShells,
-        defaultShell: "$first_list"
-    })
-}
-//store.delete("theming")
-if (store.get('themeing') == undefined) {
-    store.set("themeing", {
-        forceOffDefault: false,
-        css: `
-            :root {
-                --foreground: #ffffff;
-                --background: #000;
-                --cursor: #ffffff;
-                --selection: rgba(184, 172, 231, 0.6);
-                --black: #000000;
-                --red: #e06c75;
-                --brightRed: #e06c75;
-                --green: #A4EFA1;
-                --brightGreen: #A4EFA1;
-                --brightYellow: #EDDC96;
-                --yellow: #EDDC96;
-                --magenta: #e39ef7;
-                --brightMagenta: #e39ef7;
-                --cyan: #5fcbd8;
-                --brightBlue: #5fcbd8;
-                --brightCyan: #5fcbd8;
-                --blue: #5fcbd8;
-                --white: #d0d0d0;
-                --brightBlack: #808080;
-                --brightWhite: #ffffff;
-            }
-        `
-    })
-}
 if (store.get('firstTime') == undefined) {
     store.set("firstTime", true)
     firstTime()
@@ -109,10 +62,10 @@ if (store.get('firstTime') == undefined) {
         store.delete("firstTime")
     }
 }
-document.getElementById("theme").textContent = store.get('theming').css
+document.getElementById("theme").textContent = config.theme.css
 setInterval(function() {
-    document.getElementById("theme").textContent = store.get('themeing').css
-    if (store.get('themeing').forceOffDefault == true) {
+    document.getElementById("theme").textContent = config.theme.css
+    if (config.theme.forceOffDefault == true) {
         document.getElementById("default-style").src = ""
     } else {
         document.getElementById("default-style").src = "../styles/style.css"

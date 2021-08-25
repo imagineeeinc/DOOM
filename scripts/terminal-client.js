@@ -1,5 +1,5 @@
 var term = {}
-let shells = store.get("shells")
+let shells = config.shells
 var defaultShell
 var defaultShellName
 if (shells.defaultShell === "$first_list") {
@@ -23,8 +23,8 @@ function newTerm(name, shell) {
         cursorBlink: "bar",
         allowTransparency: true,
         theme: {
-            foreground: stls.getPropertyValue('---foregorund'),
-            background: stls.getPropertyValue('--backgorund'),
+            foreground: stls.getPropertyValue('--foreground'),
+            background: stls.getPropertyValue('--background'),
             cursor: stls.getPropertyValue('--cursor'),
             selection: stls.getPropertyValue('--selction'),
             black: stls.getPropertyValue('--black'),
@@ -43,7 +43,8 @@ function newTerm(name, shell) {
             white: stls.getPropertyValue('--'),
             brightBlack: stls.getPropertyValue('--brightBlack'),
             brightWhite: stls.getPropertyValue('--brightWhite')
-        }
+        },
+        fontFamily: stls.getPropertyValue('--fontFamily') || 'plex'
     })
     /*
     Template:
@@ -108,6 +109,14 @@ function newTerm(name, shell) {
             document.execCommand('copy')
         } else if (term[name].hasSelection() && key === "") {
             document.execCommand('paste')
+        } else if (key == '[1;6C') {
+            selectTerm("right")
+        } else if (key == '[1;6D') {
+            selectTerm("left")
+        } else if (key == '[1;6A') {
+            maximize()
+        } else if (key == '[1;6B') {
+            minimize()
         } else {
             ipc.send('run', {data: key, name: name})
         }
@@ -116,7 +125,6 @@ function newTerm(name, shell) {
     document.getElementById(name).focus()
     curTerm = name
 }
-
 ipc.send('canIstart')
 
 ipc.on('allowedToBegin', (event, arg) => {
@@ -129,6 +137,7 @@ ipc.on('allowedToBegin', (event, arg) => {
 function openTerm(name) {
     try {
         document.getElementById(name).scrollIntoView()
+        document.getElementById(name).focus()
         curTerm = name
     }
     catch(e) {}
