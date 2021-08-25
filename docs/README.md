@@ -75,6 +75,7 @@ Make sure to swap the Ctrl out for Cmd for Mac users
 - Paste: `Ctrl+Shift+V`
 - Reload Window: `Ctrl+Shift+R`
 - Ouick New Terminal instance: `Ctrl+Shift+N`
+- Close this Terminal Instance: `Ctrl+Shift+C`
 - Switch to Terminal instance on the left: `Ctrl+⬅`
 - Switch to Terminal instance on the right: `Ctrl+➡`
 - Minimize: `Ctrl+Shift+⬇`
