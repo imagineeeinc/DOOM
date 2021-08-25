@@ -43,7 +43,7 @@ document.onclick = function(event) {
     if (curEle != document.getElementById('add-more-menu') && curEle != document.getElementById('add-more-tab')) {
         document.getElementById('add-more-menu').style.display = "none";
     }
-    //TODO: more terms
+    //TODO: more terms, fonts
 }
 document.onmousemove = (e) => {mousePos = {x:e.screenX,y:e.screenY};curEle = e.target}
 function emojiPick() {
