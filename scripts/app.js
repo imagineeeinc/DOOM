@@ -1,5 +1,6 @@
 var mousePos = {x:0,y:0}
 var curEle = null
+var moreTermMenu
 document.body.onkeydown = function(event) {
     //console.log(event.keyCode)
     //<: 37, >: 39, /\: 38, \/: 40
@@ -35,15 +36,22 @@ document.body.onkeydown = function(event) {
     if (event.keyCode === 186 && event.ctrlKey === true) {
         emojiPick()
     }
+    if (event.keyCode === 80 && event.shiftKey === true && event.ctrlKey === true) {
+        console.log('Command Pallet')
+    }
+    if (event.keyCode === 84 && event.shiftKey === true && event.ctrlKey === true) {
+        moreTermMenu.popup(remote.getCurrentWindow())
+    }
+
 }
 document.onclick = function(event) {
     if (curEle != document.querySelector('emoji-picker')) {
         document.querySelector('emoji-picker').style.display = "none";
     }
-    if (curEle != document.getElementById('add-more-menu') && curEle != document.getElementById('add-more-tab')) {
-        document.getElementById('add-more-menu').style.display = "none";
+    if (curEle != document.getElementById('add-more-menu') || curEle != document.querySelector('#add-more-tab > img') || curEle != document.querySelector('#add-more-tab')) {
+        //document.getElementById('add-more-menu').style.display = "none";
     }
-    //TODO: more terms, fonts
+    //TODO: fonts, command pallet
 }
 document.onmousemove = (e) => {mousePos = {x:e.screenX,y:e.screenY};curEle = e.target}
 function emojiPick() {
@@ -74,6 +82,17 @@ function minimize() {
 document.getElementById("minimize").onmouseup = function() {
     minimize()
 }
+const moreTermsTemplate = []
+config.shells.shells.forEach(ele => {
+    let temp = {
+        label: ele.name,
+        click() {
+            newTerm(ele.name + Math.round(Math.floor(Math.random() * 1000) + 9999), ele.location)
+        }
+    }
+    moreTermsTemplate.push(temp)
+});
+moreTermMenu = Menu.buildFromTemplate(moreTermsTemplate)
 const template = [
 {
     label: 'File',
@@ -204,7 +223,11 @@ document.getElementById("menu").onclick = (e) => {
 
 document.getElementById("add-more-tab").onclick = (e) => {
     e.preventDefault()
-    document.getElementById('add-more-menu').style.display = 'block'
+    if (document.getElementById('add-more-menu').className == 'more-hide') {
+        document.getElementById('add-more-menu').className = ''
+    } else {
+        document.getElementById('add-more-menu').className = 'more-hide'
+    }
 }
 
 setInterval(function(){

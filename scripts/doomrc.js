@@ -3,25 +3,26 @@ const os = require("os")
 let startShells = os.platform() === "win32" ? `[
 	{
 			"name": "cmd",
-			"location": "C:\\\\Windows\\\\System32\\\\cmd.exe",
+			"location": "cmd.exe",
 			"icon": "$cmd.png"
 	},
 	{
 			"name": "powershell",
-			"location": "C:\\\\Windows\\\\System32\\\\WindowsPowershell\\\\v1.0\\\\powershell.exe",
+			"location": "powershell.exe",
 			"icon": "$powershell.png"
+	}
+]` : os.type() === "Darwin" ? `[
+	//for mac users
+	{
+			"name": "terminal.app" : "bash",
+			"location": os.type() === "Darwin" ? "Terminal.app" : "bash",
+			"icon": "$terminal.app.png"
 	}
 ]` : `[
 	{
 			"name": "bash",
 			"location": "bash",
 			"icon": "$bash.png"
-	},
-	//for mac users
-	{
-			"name": os.type() === "Darwin" ? "terminal.app" : "bash",
-			"location": os.type() === "Darwin" ? "Terminal.app" : "bash",
-			"icon": "$bterminal.app.png"
 	}
 ]`
 

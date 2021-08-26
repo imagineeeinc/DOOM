@@ -1,5 +1,6 @@
 //const { app, BrowserWindow } = require('electron')
 //TODO: clean up code
+const glasstron = require('glasstron');
 const { app, Tray, Menu, dialog, globalShortcut } = require('electron')
 const { BrowserWindow } = require('electron')
 const { ipcMain } = require('electron')
@@ -19,9 +20,10 @@ var autoLaunch
 let firstClose = false
 
 function createWindow () {
-  const win = new BrowserWindow({
+  const win = new glasstron.BrowserWindow({
     frame: false,
     fullscreenable: true,
+    transparent: true,
     hasShadow: true,
     width: 1100,
     height: 900,
@@ -35,20 +37,40 @@ function createWindow () {
       spellcheck: true
     }
   })
+
+  win.blurType = "acrylic"
+
+  win.setBlur(true)
+
   win.loadFile('views/index.html')
 
   return win
   //win.webContents.openDevTools()
 }
+if(process.platform === "linux")
+	app.commandLine.appendSwitch("use-gl", "desktop");
+
+app.commandLine.appendSwitch("enable-transparent-visuals");
 app.whenReady().then(() => {
-  mainWindow = createWindow()
-  mainWindow.maximize()
-  eleStore.initRenderer()
-  /*
-  setTimeout(() => {
-    console.log("allowed to start")
-    mainWindow.webContents.send('allowedToBegin', {begin: true})
-  }, 1000)*/
+  setTimeout(
+		spawnWindow,
+		process.platform == "linux" ? 1000 : 0
+		// Electron has a bug on linux where it
+		// won't initialize properly when using
+		// transparency. To work around that, it
+		// is necessary to delay the window
+		// spawn function.
+	);
+  function spawnWindow() {
+    mainWindow = createWindow()
+    mainWindow.maximize()
+    eleStore.initRenderer()
+    /*
+    setTimeout(() => {
+      console.log("allowed to start")
+      mainWindow.webContents.send('allowedToBegin', {begin: true})
+    }, 1000)*/
+  }
 })
 //TODO: move form: launch app => => start window => window ready => start psudo term => draw
 //      to :       launch app => start psudo term and start window => window ready => draw

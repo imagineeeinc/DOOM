@@ -201,5 +201,19 @@ emoji-picker {
   box-shadow: 0 0 20px rgb(17, 17, 17),
 	0 0 40px rgb(17, 17, 17);
   background-color: var(--background);
-  display: none;
+  z-index: 4;
+  border-radius: 12px;
+}
+#add-more-shells > div {
+  padding: 10px;
+  border-radius: 12px;
+}
+#add-more-shells > div:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+.focus {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+#add-more-shells > div:active {
+  background-color: rgba(255, 255, 255, 0.15);
 }

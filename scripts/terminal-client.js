@@ -1,3 +1,25 @@
+var protocolClause = '(https?:\\/\\/)';
+var domainCharacterSet = '[\\da-z\\.-]+';
+var negatedDomainCharacterSet = '[^\\da-z\\.-]+';
+var domainBodyClause = '(' + domainCharacterSet + ')';
+var tldClause = '([a-z\\.]{2,6})';
+var ipClause = '((\\d{1,3}\\.){3}\\d{1,3})';
+var localHostClause = '(localhost)';
+var portClause = '(:\\d{1,5})';
+var hostClause = '((' + domainBodyClause + '\\.' + tldClause + ')|' + ipClause + '|' + localHostClause + ')' + portClause + '?';
+var pathCharacterSet = '(\\/[\\/\\w\\.\\-%~:+]*)*([^:"\'\\s])';
+var pathClause = '(' + pathCharacterSet + ')?';
+var queryStringHashFragmentCharacterSet = '[0-9\\w\\[\\]\\(\\)\\/\\?\\!#@$%&\'*+,:;~\\=\\.\\-]*';
+var queryStringClause = '(\\?' + queryStringHashFragmentCharacterSet + ')?';
+var hashFragmentClause = '(#' + queryStringHashFragmentCharacterSet + ')?';
+var negatedPathCharacterSet = '[^\\/\\w\\.\\-%]+';
+var bodyClause = hostClause + pathClause + queryStringClause + hashFragmentClause;
+var start = '(?:^|' + negatedDomainCharacterSet + ')(';
+var end = ')($|' + negatedPathCharacterSet + ')';
+var strictUrlRegex = new RegExp(start + protocolClause + bodyClause + end);
+
+//var customUri = new RegExp('/((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\-;:&=\+\$,\w]+@)?[A-Za-z0-9\.\-]+|(?:www\.|[\-;:&=\+\$,\w]+@)[A-Za-z0-9\.\-]+)((?:\/[\+~%\/\.\w\-_]*)?\??(?:[\-\+=&;%@\.\w_]*)#?(?:[\.\!\/\\\w]*))?)/')
+
 var term = {}
 let shells = config.shells
 var defaultShell
@@ -82,10 +104,12 @@ function newTerm(name, shell) {
     term[name].loadAddon(term[name].fitA)
     term[name].fitA.fit()
 
+    term[name].registerLinkMatcher(strictUrlRegex, (e, uri)=>{link(uri)})
+
     let tab = document.createElement("span")
     let clo = closeBtn.cloneNode(true)
     tab.id = "tab-" + name
-    tab.innerHTML = "<span>" + shell || name + "</span>"
+    tab.innerHTML = "<span>" + name.replace(/[0-9]/g, '') + "</span>"
     tab.append(clo)
     tab.setAttribute("title", name)
     tab.setAttribute("onclick", "openTerm('" + name +"')")

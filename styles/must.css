@@ -55,3 +55,6 @@ emoji-picker {
 	display: none;
 	z-index: 5;
 }
+.first-hide {transform: translateY(-500vw);transition-duration: .5s;display: none;}
+.hide {display: none;}
+.more-hide {transform: translateX(50vw);transition-duration: .5s;}

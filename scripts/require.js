@@ -10,6 +10,7 @@ const contents = win.webContents
 var ipc = require('electron').ipcRenderer
 
 const { FitAddon } = require("xterm-addon-fit")
+const { WebLinksAddon } = require("xterm-addon-web-links")
 const eleStore = require('electron-store')
 const osu = require('node-os-utils')
 /*
@@ -85,6 +86,31 @@ function firstTime() {
     }
     document.getElementById("first-time").style.display="block"
     document.querySelector("#first-time > .close").onmouseup = () => {
-        document.getElementById("first-time").style.display="none"
+        document.getElementById("first-time").className="first-hide"
     }
+}
+
+moreTerms(config.shells.shells)
+
+function moreTerms(terms) {
+    terms.forEach(ele => {
+        let doc = document.createElement('div')
+        let img = {src: ''}
+        if (ele.icon == '$cmd.png') {
+            img.src = '../file/icons/cmd.png'
+        } else if (ele.icon == '$powershell.png') {
+            img.src = '../file/icons/powershell.png'
+        } else if (ele.icon == '$bash.png') {
+            img.src = '../file/icons/bash.png'
+        } else if (ele.icon == '$terminal.app.png') {
+            img.src = '../file/icons/terminal.app.png'
+        } else if (typeof ele.icon == 'string') {
+            img.src = ele.icon
+        } else {
+            img.src = '../file/icons/terminal.svg'
+        }
+        doc.innerHTML = '<img style="width: 1em;margin-top: 2px;" src="'+img.src+'">'+ele.name
+        doc.setAttribute('onclick', `newTerm('${ele.name}' + Math.round(Math.floor(Math.random() * 1000) + 9999), '${ele.location}')`)
+        document.getElementById('add-more-shells').append(doc)
+    });
 }
