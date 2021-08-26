@@ -23,6 +23,8 @@ Few are:
 - customizing settings
 - split terminal
 - extension (probably not)
+- a simple text editor
+- command palet
 - Remote connections
   - ssh
   - vnc (probably not)
