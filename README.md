@@ -50,3 +50,5 @@ npm start
 npm run dist
 # build executable
 ```
+# License
+This is released under [MIT License](https://github.com/imagineeeinc/DOOM/blob/main/LICENSE)
