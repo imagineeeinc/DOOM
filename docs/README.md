@@ -81,6 +81,9 @@ Make sure to swap the Ctrl out for Cmd for Mac users
 - Minimize: `Ctrl+Shift+⬇`
 - Maximize: `Ctrl+Shift+⬆`
 - Emoji Picker: `Ctrl+Shift+;`
+- More Terms Menu: `Ctrl+Shift+T`
+- Planed:
+  - Command Pallet: `Ctrl+Shit+P`
 
 # Features
 There are amzing features avalible in DOOM, Read on to learn more

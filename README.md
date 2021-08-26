@@ -23,6 +23,8 @@ Few are:
 - customizing settings
 - split terminal
 - extension (probably not)
+- a simple text editor
+- command palet
 - Remote connections
   - ssh
   - vnc (probably not)
@@ -48,3 +50,5 @@ npm start
 npm run dist
 # build executable
 ```
+# License
+This is released under [MIT License](https://github.com/imagineeeinc/DOOM/blob/main/LICENSE)
