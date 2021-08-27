@@ -96,20 +96,25 @@ function moreTerms(terms) {
     terms.forEach(ele => {
         let doc = document.createElement('div')
         let img = {src: ''}
-        if (ele.icon == '$cmd.png') {
-            img.src = '../file/icons/cmd.png'
-        } else if (ele.icon == '$powershell.png') {
-            img.src = '../file/icons/powershell.png'
-        } else if (ele.icon == '$bash.png') {
-            img.src = '../file/icons/bash.png'
-        } else if (ele.icon == '$terminal.app.png') {
-            img.src = '../file/icons/terminal.app.png'
-        } else if (typeof ele.icon == 'string') {
-            img.src = ele.icon
+        if (ele.icon == '$cmd') {
+            img.src = 'codicon-terminal-cmd'
+        } else if (ele.icon == '$powershell') {
+            img.src = 'codicon-terminal-powershell'
+        } else if (ele.icon == '$bash') {
+            img.src = 'codicon-terminal-bash'
+        } else if (ele.icon == '$debian') {
+            img.src = 'codicon-terminal-debian'
+        } else if (ele.icon == '$linux') {
+            img.src = 'codicon-terminal-linux'
+        } else if (ele.icon == '$tmux') {
+            img.src = 'codicon-terminal-tmux'
+        } else if (ele.icon == '$ubuntu') {
+            img.src = 'codicon-terminal-ubuntu'
         } else {
-            img.src = '../file/icons/terminal.svg'
+            img.src = 'codeicon-terminal'
         }
-        doc.innerHTML = '<img style="width: 1em;margin-top: 2px;" src="'+img.src+'">'+ele.name
+        doc.innerHTML = ele.name
+        doc.className = img.src
         doc.setAttribute('onclick', `newTerm('${ele.name}' + Math.round(Math.floor(Math.random() * 1000) + 9999), '${ele.location}')`)
         document.getElementById('add-more-shells').append(doc)
     });

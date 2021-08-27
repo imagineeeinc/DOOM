@@ -6,6 +6,7 @@
     <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
 
     <link rel="stylesheet" href="../styles/font.css">
+    <link rel="stylesheet" href="../file/fonts/codicon.css" />
     <link rel="stylesheet" href="../styles/must.css" id="default-style">
     <link rel="stylesheet" href="../styles/style.css" id="default-style">
     <link rel="stylesheet" href="../node_modules/xterm/css/xterm.css" />
@@ -18,19 +19,19 @@
 </head>
 <body onscroll="disableScrolling()" onmousewheel="enableScrolling()" onclick="enableScrolling()" onmousemove="enableScrolling()">
     <div id="titlebar">
-        <button id="menu" title="menu"><img src="../file/icons/menu.svg"></button>
+        <button id="menu" title="menu" class="codicon-menu"></button>
         <div id="drag" title="DOOM Terminal">DOOM</div>
         <div id="traffic">
-            <button id="minimize" title="minimize"><img src="../file/icons/minimize.svg"></button>
-            <button id="maximize" title="maximize"><img src="../file/icons/maximize.svg"></button>
-            <button id="close" title="close"><img src="../file/icons/close.svg"></button>
+            <button id="minimize" title="minimize" class="codicon-chrome-minimize"></button>
+            <button id="maximize" title="maximize" class="codicon-chrome-maximize"></button>
+            <button id="close" title="close" class="codicon-chrome-close"></button>
         </div>
     </div>
     <div id="tab-holder">
         <div id="tabs" class="tabs"></div>
         <div id="more-tabs" class="more-tabs">
-            <button id="add-tab" title="add new tab" onclick="newTerm(defaultShellName + Math.round(Math.floor(Math.random() * 1000) + 9999))"><img src="../file/icons/add.svg"></button>
-            <button id="add-more-tab" title="open another new tab"><img src="../file/icons/down-arrow.svg"></button>
+            <button id="add-tab" title="add new tab" onclick="newTerm(defaultShellName + Math.round(Math.floor(Math.random() * 1000) + 9999))" class="codicon-add"></button>
+            <button id="add-more-tab" title="open another new tab" class="codicon-chevron-down"></button>
         </div>
     </div>
     <div id="terminal-holder">

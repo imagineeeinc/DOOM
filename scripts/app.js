@@ -69,11 +69,18 @@ document.getElementById("close").onmouseup = function() {
 document.getElementById("maximize").onmouseup = function() {
     maximize()
 }
+if (win.isMaximized()) {
+    document.getElementById('maximize').className = 'codicon-chrome-restore'
+} else {
+    document.getElementById('maximize').className = 'codicon-chrome-maximize'
+}
 function maximize() {
     if (win.isMaximized()) {
         win.unmaximize()
+        document.getElementById('maximize').className = 'codicon-chrome-maximize'
     } else {
         win.maximize()
+        document.getElementById('maximize').className = 'codicon-chrome-restore'
     }
 }
 function minimize() {

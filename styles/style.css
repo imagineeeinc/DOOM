@@ -1,7 +1,7 @@
 :root {
     margin: 0px;
     padding: 0px;
-    font-family: var(--fontFamily),plex,-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-family: var(--fontFamily),plex,-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", codicon;
     animation-name: view;
     animation-duration: 0.2s;
     color: var(--foreground);
@@ -39,7 +39,7 @@ body {
   border-radius: 5px;
 }
 #titlebar {
-  background-color: var(--background);
+  /*background-color: var(--background);*/
   display: grid;
   justify-content: center;
   user-select: none;
@@ -79,14 +79,11 @@ body {
 #traffic > button {
   border: none;
   border-radius: 3px;
-  background-color: var(--background);
+  background-color: transparent;
   width: 30px;
   height: 20px;
   margin: 0 !important;
   padding: 0;
-}
-#traffic > button > img {
-  height: 18px;
 }
 #traffic > button:hover {
   background-color: rgba(255, 255, 255, 0.1);
@@ -144,12 +141,10 @@ body {
   height: 25px;
   margin: 0 !important;
   padding: 0;
+  font-size: larger;
 }
 #more-tabs > button:hover {
   background-color: rgba(255, 255, 255, 0.1);
-}
-#more-tabs > button > img {
-  height: 23px;
 }
 #tabs > span > button {
   border: none;
@@ -198,8 +193,8 @@ emoji-picker {
   right:0;
   top:50px;
   min-width: 200px;
-  box-shadow: 0 0 20px rgb(17, 17, 17),
-	0 0 40px rgb(17, 17, 17);
+  box-shadow: 0 0 20px var(--background),
+	0 0 40px var(--background);
   background-color: var(--background);
   z-index: 4;
   border-radius: 12px;
@@ -211,7 +206,7 @@ emoji-picker {
 #add-more-shells > div:hover {
   background-color: rgba(255, 255, 255, 0.1);
 }
-.focus {
+.focus:not(.terminal .xterm) {
   background-color: rgba(255, 255, 255, 0.1);
 }
 #add-more-shells > div:active {

@@ -24,6 +24,7 @@ var term = {}
 let shells = config.shells
 var defaultShell
 var defaultShellName
+//var defaultShellIcon
 if (shells.defaultShell === "$first_list") {
     defaultShell = shells.shells[0].location
     defaultShellName = shells.shells[0].name
@@ -38,7 +39,8 @@ var stls = getComputedStyle(document.documentElement)
 //.getPropertyValue('--my-variable-name')
 
 var closeBtn = document.createElement("button")
-closeBtn.innerHTML = "<img src='../file/icons/close.svg'>"
+closeBtn.className = 'codicon-close'
+closeBtn.setAttribute('style', 'font-size: larger;')
 
 function newTerm(name, shell) {
     term[name] = new Terminal({
@@ -46,7 +48,7 @@ function newTerm(name, shell) {
         allowTransparency: true,
         theme: {
             foreground: stls.getPropertyValue('--foreground'),
-            background: stls.getPropertyValue('--background'),
+            background: '#00000000',
             cursor: stls.getPropertyValue('--cursor'),
             selection: stls.getPropertyValue('--selction'),
             black: stls.getPropertyValue('--black'),
@@ -66,6 +68,7 @@ function newTerm(name, shell) {
             brightBlack: stls.getPropertyValue('--brightBlack'),
             brightWhite: stls.getPropertyValue('--brightWhite')
         },
+        fontWeight: stls.getPropertyValue('--fontWeight'),
         fontFamily: stls.getPropertyValue('--fontFamily') || 'plex'
     })
     /*
@@ -146,7 +149,7 @@ function newTerm(name, shell) {
         }
     })
     document.getElementById(name).scrollIntoView()
-    document.getElementById(name).focus()
+    term[name].focus()
     curTerm = name
 }
 ipc.send('canIstart')
@@ -161,7 +164,7 @@ ipc.on('allowedToBegin', (event, arg) => {
 function openTerm(name) {
     try {
         document.getElementById(name).scrollIntoView()
-        document.getElementById(name).focus()
+        term[name].focus()
         curTerm = name
     }
     catch(e) {}

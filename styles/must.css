@@ -27,18 +27,18 @@ hr {
 	left: 15vw;
 	width: 65vw;
 	max-height: 80vh;
-	background-color: rgb(8, 8, 8);
+	background-color: var(--background);
 	padding: 2vw;
-	box-shadow: 0 0 20px rgb(17, 17, 17),
-	0 0 40px rgb(17, 17, 17),
-	0 0 60px rgb(17, 17, 17),
-	0 0 80px rgb(17, 17, 17),
-	0 0 100px rgb(17, 17, 17),
-	0 0 120px rgb(17, 17, 17),
-	0 0 140px rgb(17, 17, 17),
-	0 0 160px rgb(17, 17, 17),
-	0 0 180px rgb(17, 17, 17),
-	0 0 200px rgb(17, 17, 17);
+	box-shadow: 0 0 20px var(--background),
+	0 0 40px var(--background),
+	0 0 60px var(--background),
+	0 0 80px var(--background),
+	0 0 100px var(--background),
+	0 0 120px var(--background),
+	0 0 140px var(--background),
+	0 0 160px var(--background),
+	0 0 180px var(--background),
+	0 0 200px var(--background);
 	z-index: 3;
 	overflow-y: scroll;
 	border-radius: 12px;

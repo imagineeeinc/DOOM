@@ -37,8 +37,15 @@ function createWindow () {
       spellcheck: true
     }
   })
-
-  win.blurType = "acrylic"
+  let config
+  try {
+    if (fs.existsSync(path.join(os.homedir()+"/.doomrc"))) {
+        console.log('.doomrc exists')
+        config = JSON.parse(fs.readFileSync(path.join(os.homedir()+"/.doomrc"), 'utf8'))
+    } else {}
+  } catch(err){
+  }
+  win.blurType = config.theme.blur || "blurbehind"
 
   win.setBlur(true)
 
