@@ -10,6 +10,7 @@
 - [Key Bindings](#Key-Bindings)
 - [Features](#Features)
   - [Emoji Picker](#Emoji-Picker)
+  - [Transparent Windows](#transparent-windows)
 
 # About
 <p align="center">
@@ -21,9 +22,10 @@ DOOM is a powerfully small application for command-line interface and emulating 
 Extra information on the develoment
 
 ### The Stack
-The app is built on node js with electron js to make ntive apps, it uses electron builder to build to native executables. The app has been built on web technolgies and standards. It uses xterm js to emulate terminal in html, node-pty to open psuedo terminals in node js.
+The app is built on node js with electron js to make native apps, glasstron to make transparent windows, it uses electron builder to build to native executables. The app has been built on web technolgies and standards. It uses xterm js to emulate terminal in html, node-pty to open psuedo terminals in node js.
 
 ### Extra Notices
+- the window dosn't snap to sides on windows 10, this is due windows disabling aero snap on transparent windows (read more [here](https://github.com/AryToNeX/Glasstron/issues/172#issuecomment-907348311))
 - Any problems with xterm js or node-pty, do not make a issue in this project, make it in their official repo.
 - This is just a side project and not meant to be a mainstrem terminal emulator.
 
@@ -96,3 +98,9 @@ __Know Problems__
 - your system default emoji picker won't work due to certain problems with xterm js
 - some times using emojis in when typing will show as unknown charecter, but work when printed by the shell; this might be due to node-pty, cmd on windows or xter js.
 - emojis taking up space of two, this is a known problem in xterm js, so we have to wait until they fix it.
+
+## Transparent Windows
+DOOM supports transparent windows under the hood, by setting the `--background` to a transparent colour and setting the blur value to either 'acrylic'/ 'blurbehind'/ 'transperent'.
+
+__Known Problems__
+- the window dosn't snap to sides on windows 10, this is due windows disabling aero snap on transparent windows (read more [here](https://github.com/AryToNeX/Glasstron/issues/172#issuecomment-907348311))
