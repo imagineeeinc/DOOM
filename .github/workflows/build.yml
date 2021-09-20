@@ -21,6 +21,14 @@ jobs:
         with:
           node-version: 15
 
+      - name: Install node-gyp
+        run: echo 'npm install --global node-gyp'
+
+      - name: Install windows build tools
+        run: echo 'if [ "$RUNNER_OS" == "Windows" ]; then
+                       npm install --global windows-build-tools
+'
+
       - name: Build/release Electron app
         uses: samuelmeuli/action-electron-builder@v1
         with:
