@@ -1,0 +1,2 @@
+tasks:
+    - before: brew install rpm && brew install gh
