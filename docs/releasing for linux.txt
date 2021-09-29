@@ -1,0 +1,2 @@
+first install rpm on the computer, then gh cli for easy upload, compile the app, sign in on gh cli;
+use 'gh release upload [the release tag] <files on by one seperated by spaces>' and boom
