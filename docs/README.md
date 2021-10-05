@@ -50,7 +50,7 @@ Make sure to swap the Ctrl out for Cmd for Mac users
 - Paste: `Ctrl+Shift+V`
 - Reload Window: `Ctrl+Shift+R`
 - Ouick New Terminal instance: `Ctrl+Shift+N`
-- Close this Terminal Instance: `Ctrl+Shift+C`
+- Close this Terminal Instance: `Ctrl+Shift+C` (changing to `Ctrl+Shift+Q` in a later update)
 - Switch to Terminal instance on the left: `Ctrl+⬅`
 - Switch to Terminal instance on the right: `Ctrl+➡`
 - Minimize: `Ctrl+Shift+⬇`
@@ -60,6 +60,7 @@ Make sure to swap the Ctrl out for Cmd for Mac users
 - Planed:
   - Command Pallet: `Ctrl+Shit+P`
   - Menu: `Ctrl+Shift+M`
+  - Close The app: `Ctrl+Shift+Alt+Q`
 
 ## Features
 There are amzing features avalible in DOOM, Read on to learn more
