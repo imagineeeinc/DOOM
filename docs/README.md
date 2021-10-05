@@ -62,6 +62,8 @@ Make sure to swap the Ctrl out for Cmd for Mac users
   - Menu: `Ctrl+Shift+M`
   - Close The app: `Ctrl+Shift+Alt+Q`
 
+(A small change for the key combination input is coming, switching from the hard coded system to a libary so in the future the user can change the keys)
+
 ## Features
 There are amzing features avalible in DOOM, Read on to learn more
 ### Emoji Picker
