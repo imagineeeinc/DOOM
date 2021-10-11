@@ -14,6 +14,8 @@ Or, [build from source](#Build)
 # Documentation
 [Read the documention here](https://github.com/imagineeeinc/DOOM/tree/main/docs)
 
+[Work in progress docs](https://imagineee.gitbook.io/doom/)
+
 # Features Planned
 There are features that are still being implemented
 Few are:
