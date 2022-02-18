@@ -26,8 +26,7 @@ jobs:
 
       - name: Install windows build tools
         run: echo 'if [ "$RUNNER_OS" == "Windows" ]; then
-                       npm install --global windows-build-tools
-'
+                       npm install --global windows-build-tool'
 
       - name: Build/release Electron app
         uses: samuelmeuli/action-electron-builder@v1
