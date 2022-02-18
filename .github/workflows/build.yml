@@ -26,8 +26,8 @@ jobs:
 
 
       - name: Install windows build tools
-      if: matrix.os == 'windows-latest'
-        run: echo 'npm install --global windows-build-tool && npm config set msvs_version 2017'
+        run: echo 'if [ "$RUNNER_OS" == "Windows" ]; then
+                         npm install --global windows-build-tool && npm config set msvs_version 2017'
 
       - name: Build/release Electron app
         uses: samuelmeuli/action-electron-builder@v1
