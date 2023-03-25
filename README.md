@@ -2,6 +2,8 @@
 <p align="center">
   <img src="build/icon.png" width="30%">
 </p>
+<h3 align="center">Project on Standby</h3>
+
 DOOM is a powerfully small application for command-line interface and emulating terminals.
 It is focused at being primarily around speed, stability, customizability, beautiful design and extra features.
 Additionally it is made with web standards.
